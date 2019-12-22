@@ -7,6 +7,3 @@ edition = "2018"
 [dependencies]
 log = { version = "0.4.8", features = ["std"] }
 colored = { version = "1.9.0", optional = true }
-
-[features]
-default = ["colored"]

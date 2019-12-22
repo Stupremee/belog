@@ -2,8 +2,8 @@
 
 #[cfg(feature = "colored")]
 extern crate colored;
-//#[cfg(feature = "colored")]
-//use colored::*;
+#[cfg(feature = "colored")]
+use colored::*;
 
 use log::{Level, Log, Metadata, Record, SetLoggerError};
 
@@ -17,12 +17,31 @@ impl Log for BeautifulLogger {
     }
 
     fn log(&self, record: &Record) {
-        unimplemented!()
+        let prefix = match record.level() {
+            Level::Error => "error",
+            Level::Debug => "debug",
+            Level::Trace => "trace",
+            Level::Warn => "warn",
+            Level::Info => "info",
+        };
+
+        #[cfg(feature = "colored")]
+        let prefix = (match record.level() {
+            Level::Error => prefix.red(),
+            Level::Debug => prefix.cyan(),
+            Level::Trace => prefix.purple(),
+            Level::Warn => prefix.yellow(),
+            Level::Info => prefix.white(),
+        })
+        .bold();
+
+        let message = format!("{}: {}", prefix, record.args());
+        #[cfg(feature = "colored")]
+        let message = message.bold();
+        println!("{}", message);
     }
 
-    fn flush(&self) {
-        unimplemented!()
-    }
+    fn flush(&self) {}
 }
 
 pub fn try_init_with_level(level: Level) -> Result<(), SetLoggerError> {
@@ -37,7 +56,7 @@ pub fn init_with_level(level: Level) {
 }
 
 pub fn try_init() -> Result<(), SetLoggerError> {
-    try_init_with_level(Level::Trace)
+    try_init_with_level(Level::Info)
 }
 
 pub fn init() {
