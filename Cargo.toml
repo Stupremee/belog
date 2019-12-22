@@ -1,8 +1,14 @@
 [package]
 name = "belog"
 version = "0.1.0"
+keywords = ["log", "logging", "logging"]
 authors = ["Justus K. <justus.k@protonmail.com>"]
 edition = "2018"
+license = "GPLv3"
+description = "A minimal and pretty log impplementation for the log crate."
+homepage = "https://github.com/Stupremee/belog"
+repository = "https://github.com/Stupremee/belog"
+documentation = "https://docs.rs/belog"
 
 [dependencies]
 log = { version = "0.4.8", features = ["std"] }
