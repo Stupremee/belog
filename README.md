@@ -2,6 +2,10 @@
 
 **Be**autiful **log** is a minimal and pretty logging implementation for the [log](https://crates.io/crates/log) crate.
 
+## Preview
+
+[![asciicast](https://asciinema.org/a/y4BiQwhmFw4FnWGEuPOOZNEl6.svg)](https://asciinema.org/a/y4BiQwhmFw4FnWGEuPOOZNEl6)
+
 ## Usage
 
 Add this to your Cargo.toml:
