@@ -44,6 +44,20 @@ impl Log for BeautifulLogger {
     fn flush(&self) {}
 }
 
+/// Tries to initialize the logger with the given level.
+///
+/// # Example
+/// ```
+/// # #[macro_use]
+/// # extern crate log;
+/// # extern crate belog;
+/// # fn main() {
+/// belog::try_init_with_level(log::Level::Debug).expect("Failed to initialize logger.");
+///
+/// info!("Some info here");
+/// trace!("Some trace message here");
+/// # }
+/// ```
 pub fn try_init_with_level(level: Level) -> Result<(), SetLoggerError> {
     let logger = BeautifulLogger { level };
     log::set_max_level(level.to_level_filter());
@@ -51,14 +65,58 @@ pub fn try_init_with_level(level: Level) -> Result<(), SetLoggerError> {
     Ok(())
 }
 
+/// Initializes the logger with the given level,
+/// but panics if it fails to set the logger.
+///
+/// # Example
+/// ```
+/// # #[macro_use]
+/// # extern crate log;
+/// # extern crate belog;
+/// # fn main() {
+/// belog::init_with_level(log::Level::Info);
+///
+/// info!("Some info here");
+/// debug!("Some debug message here");
+/// # }
+/// ```
 pub fn init_with_level(level: Level) {
     try_init_with_level(level).expect("Failed to set the logger.");
 }
 
+/// Tries to initialize the logger with the default level, which is set to Info.
+///
+/// # Example
+/// ```
+/// # #[macro_use]
+/// # extern crate log;
+/// # extern crate belog;
+/// # fn main() {
+/// belog::try_init().expect("Failed to initialize logger.");
+///
+/// info!("Some info here");
+/// error!("An error occurred");
+/// # }
+/// ```
 pub fn try_init() -> Result<(), SetLoggerError> {
     try_init_with_level(Level::Info)
 }
 
+/// Initializes the logger with the default level, which is set to Info,
+/// but panics if it fails.
+///
+/// # Example
+/// ```
+/// # #[macro_use]
+/// # extern crate log;
+/// # extern crate belog;
+/// # fn main() {
+/// belog::init();
+///
+/// info!("Some info here");
+/// error!("An error occurred");
+/// # }
+/// ```
 pub fn init() {
     try_init().expect("Failed to set the logger.");
 }
