@@ -1,6 +1,6 @@
 # Belog
 
-![Crates.io](https://img.shields.io/crates/v/belog)
+[![Crates.io](https://img.shields.io/crates/v/belog)](https://crates.io/crates/belog)
 
 **Be**autiful **log** is a minimal and pretty logging implementation for the [log](https://crates.io/crates/log) crate.
 
